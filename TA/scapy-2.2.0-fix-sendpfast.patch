@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+
+  <head>
+    <title>
+      scapy-2.2.0-fix-sendpfast.patch on Ticket #634 – Attachment
+     – Scapy
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/scapy/search" />
+        <link rel="help" href="/scapy/wiki/TracGuide" />
+        <link rel="alternate" href="/scapy/raw-attachment/ticket/634/scapy-2.2.0-fix-sendpfast.patch" type="text/x-diff; charset=iso-8859-15" title="Original Format" />
+        <link rel="up" href="/scapy/ticket/634" title="Ticket #634" />
+        <link rel="start" href="/scapy/wiki" />
+        <link rel="stylesheet" href="/scapy/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/scapy/chrome/common/css/diff.css" type="text/css" /><link rel="stylesheet" href="/scapy/chrome/common/css/code.css" type="text/css" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/scapy/search/opensearch" title="Search Scapy" />
+    <script type="text/javascript" src="/scapy/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/scapy/chrome/common/js/babel.js"></script><script type="text/javascript" src="/scapy/chrome/common/js/trac.js"></script><script type="text/javascript" src="/scapy/chrome/common/js/search.js"></script><script type="text/javascript" src="/scapy/chrome/common/js/diff.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/scapy/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+      <script type="text/javascript" src="/scapy/chrome/common/js/folding.js"></script>
+      <script type="text/javascript">
+        jQuery(document).ready(function($) {
+          $('#preview table.code').enableCollapsibleColumns($('#preview table.code thead th.content'));
+        });
+      </script>
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <h1><a href="http://www.secdev.org/projects/scapy/">Scapy</a></h1>
+      </div>
+      <form id="search" action="/scapy/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/scapy/login">Login</a></li><li><a href="/scapy/wiki/TracGuide">Help/Guide</a></li><li><a href="/scapy/about">About Trac</a></li><li class="last"><a href="/scapy/prefs">Preferences</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/scapy/wiki">Wiki</a></li><li><a href="/scapy/timeline">Timeline</a></li><li><a href="/scapy/roadmap">Roadmap</a></li><li><a href="/scapy/browser">Browse Source</a></li><li><a href="/scapy/report">View Tickets</a></li><li><a href="/scapy/newticket">New Ticket</a></li><li class="last"><a href="/scapy/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="last first"><a href="/scapy/ticket/634">Back to Ticket #634</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="attachment">
+        <h1><a href="/scapy/ticket/634">Ticket #634</a>: scapy-2.2.0-fix-sendpfast.patch</h1>
+        <table id="info" summary="Description">
+          <tbody>
+            <tr>
+              <th scope="col">File scapy-2.2.0-fix-sendpfast.patch,
+                <span title="502 bytes">502 bytes</span>
+                (added by Scott, <a class="timeline" href="/scapy/timeline?from=2011-09-20T02%3A21%3A46%2B02%3A00&amp;precision=second" title="2011-09-20T02:21:46+02:00 in Timeline">3 months</a> ago)</th>
+            </tr>
+            <tr>
+              <td class="message searchable">
+                <p>
+Patch to fix 2.2.0
+</p>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="preview" class="searchable">
+          
+  <div class="diff">
+  <ul class="entries">
+      <li class="entry">
+        <h2>
+          <a>scapy-2.2.0/scapy/sendrecv.py</a>
+        </h2>
+        <pre>diff -ru a/scapy-2.2.0/scapy/sendrecv.py b/scapy-2.2.0/scapy/sendrecv.py</pre>
+        <table class="trac-diff inline" summary="Differences" cellspacing="0">
+              <colgroup><col class="lineno" /><col class="lineno" /><col class="content" /></colgroup>
+              <thead>
+                <tr>
+                  <th title="File a/scapy-2.2.0/scapy/sendrecv.py 2010-08-11 11:09:51.000000000 +1200">
+                      a
+                  </th>
+                  <th title="File b/scapy-2.2.0/scapy/sendrecv.py 2011-09-20 11:22:26.776978191 +1200">
+                      b
+                  </th>
+                  <td><em></em> </td>
+                </tr>
+              </thead>
+            <tbody class="unmod">
+                  <tr>
+                          <th>13</th><th>13</th><td class="l"><span>import arch</span> </td>
+                  </tr><tr>
+                          <th>14</th><th>14</th><td class="l"><span>from config import conf</span> </td>
+                  </tr><tr>
+                          <th>15</th><th>15</th><td class="l"><span>from packet import Gen</span> </td>
+                  </tr>
+            </tbody><tbody class="mod">
+                      <tr class="first">
+                        <th>16</th><th> </th><td class="l"><span>from utils import warning,get_temp_file,PcapReader<del></del></span> </td>
+                      </tr>
+                      <tr class="last">
+                        <th> </th><th>16</th><td class="r"><span>from utils import warning,get_temp_file,PcapReader<ins>,wrpcap</ins></span> </td>
+                      </tr>
+            </tbody><tbody class="unmod">
+                  <tr>
+                          <th>17</th><th>17</th><td class="l"><span>import plist</span> </td>
+                  </tr><tr>
+                          <th>18</th><th>18</th><td class="l"><span>from error import log_runtime,log_interactive</span> </td>
+                  </tr><tr>
+                          <th>19</th><th>19</th><td class="l"><span>from base_classes import SetGen</span> </td>
+                  </tr>
+            </tbody>
+        </table>
+      </li>
+  </ul>
+</div>
+
+        </div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="last first">
+          <a rel="nofollow" href="/scapy/raw-attachment/ticket/634/scapy-2.2.0-fix-sendpfast.patch">Original Format</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/scapy/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/scapy/about"><strong>Trac 0.12.1</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right"></p>
+    </div>
+  </body>
+</html>
