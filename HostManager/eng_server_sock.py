@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/usr/bin/python
+=======
+#!/usr/bin/python # {{{
+>>>>>>> f97112a8e44922f10ce183986a0a7e6da45df35f
 import socket, time
 from grad import *
 c = Netcal()
@@ -7,7 +11,11 @@ max_rate_dict = {}
 max_rate_list = []
 optimal_rate_dict = {}
 socket_wait_time = 60
+<<<<<<< HEAD
 NUM_SOURCES = 2
+=======
+NUM_SOURCES = 2 # }}}
+>>>>>>> f97112a8e44922f10ce183986a0a7e6da45df35f
 def listen_for_endhosts(): # {{{
     MGR_IP_ADDRESS = '203.178.135.32'
     MGR_PORT = 1890
@@ -23,10 +31,14 @@ def get_max_rate(end_host_conn, host_id): # {{{
     print 'received max_rate = ' +max_rate +' from EndHost: ' +host_id
     return max_rate # }}}
 def nw_opt_rate(endhost_weight): # {{{
+<<<<<<< HEAD
     print endhost_weight
     all_opt_rate = c.optFunc(endhost_weight)
     print 'TRI'
     print all_opt_rate
+=======
+    all_opt_rate = c.optFunc(endhost_weight)
+>>>>>>> f97112a8e44922f10ce183986a0a7e6da45df35f
     length = all_opt_rate.size[0]
     for i in range(length): 
         if all_opt_rate[i] < 1e-3: all_opt_rate[i] = 0
