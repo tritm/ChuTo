@@ -20,11 +20,11 @@ class Netcal(object):
         self.L = L
         self.IJ = I*J
         self.GH1 = numpy.array([[NULL for ij in range(self.IJ)] for l in range(self.L)])
-        self.capa = capa
+        if capa == -1: 
+            self.capa = matrix(.1 * numpy.ones((self.L)))
+        else: self.capa = capa
         self.rhs2st = matrix(numpy.zeros(self.IJ))
         self.H = self.routing_matrix() # }}}
-        print 'TRI.grad: self.capa = ', self.capa, 
-        print 'TRI.grad: self.rhs2st = ', self.rhs2st 
     def utility(self,z): # {{{
         u = numpy.empty((self.L))
         u1 = lambda l: 1. / self.capa[l] * (sum(sum(self.H[i][l][j] * z[i][j] for j in range(self.J)) for i in range(self.I)))
@@ -86,8 +86,7 @@ class Netcal(object):
         G = matrix(numpy.vstack((GH, DI)))
         h = matrix(numpy.vstack((self.capa, self.rhs2st)))
         sol = solvers.cp(self.F, G, h)
-        # sol['zl']: congestion price for linear constraints [0:3]:constraints for l1,l2,l3; [4:8]: constraints for z >= 0
-        return sol['x'], sol['zl'] # }}}
+        return sol['x'],sol['z'] # }}}
 logfile.close 
    
     

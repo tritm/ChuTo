@@ -1,3 +1,1 @@
-from grad import optFunc
-x = optFunc()
-print x
+print 'cai nay chay co ve rat nhanh'
