@@ -12,7 +12,7 @@ class Netcal(object):
         H[1][1][1] = 1.
         H[1][2][0] = 1.
         return H # }}}
-    def __init__(self,q=0.001,NULL = 1e-300, I = 2, J = 2, L = 3): # {{{
+    def __init__(self,q=0.001,NULL = 1e-300, I = 2, J = 2, L = 3, capa = -1): # {{{
         self.q = q
         self.NULL = NULL
         self.I = I
@@ -20,24 +20,26 @@ class Netcal(object):
         self.L = L
         self.IJ = I*J
         self.GH1 = numpy.array([[NULL for ij in range(self.IJ)] for l in range(self.L)])
-        self.c = matrix(10 * numpy.ones((self.L)))
+        if capa == -1: 
+            self.capa = matrix(.1 * numpy.ones((self.L)))
+        else: self.capa = capa
         self.rhs2st = matrix(numpy.zeros(self.IJ))
         self.H = self.routing_matrix() # }}}
     def utility(self,z): # {{{
         u = numpy.empty((self.L))
-        u1 = lambda l: 1. / self.c[l] * (sum(sum(self.H[i][l][j] * z[i][j] for j in range(self.J)) for i in range(self.I)))
+        u1 = lambda l: 1. / self.capa[l] * (sum(sum(self.H[i][l][j] * z[i][j] for j in range(self.J)) for i in range(self.I)))
         for l in range(self.L): u[l] = u1(l)
         return u # }}}
     def hfunc(self,m, n, p, k, z): # {{{
         u = self.utility(z)
         if m == p and n == k: 
             return self.endhost_weight[m] / sum(z[m][j] for j in range(self.J)) ** 2 + \
-                   self.q * sum(((self.H[m][l][n] / self.c[l]) ** 2) * math.exp(u[l]) for l in range(self.L))
+                   self.q * sum(((self.H[m][l][n] / self.capa[l]) ** 2) * math.exp(u[l]) for l in range(self.L))
         elif m == p:
             return self.endhost_weight[m] / sum(z[m][j] for j in range(self.J)) ** 2 + \
-                    self.q * sum((self.H[m][l][n] * self.H[p][l][k] / self.c[l] ** 2) * math.exp(u[l]) for l in range(self.L))
+                    self.q * sum((self.H[m][l][n] * self.H[p][l][k] / self.capa[l] ** 2) * math.exp(u[l]) for l in range(self.L))
         else:
-            return self.q * sum(self.H[m][l][n] * self.H[p][l][k] / (self.c[l] ** 2) * math.exp(u[l]) for l in range(self.L)) # }}}
+            return self.q * sum(self.H[m][l][n] * self.H[p][l][k] / (self.capa[l] ** 2) * math.exp(u[l]) for l in range(self.L)) # }}}
     def func(self,x): # {{{
         z = numpy.reshape(x, (self.I, self.J))
         u = self.utility(z)
@@ -48,7 +50,7 @@ class Netcal(object):
         Df = numpy.empty((self.I, self.J))
         u = self.utility(z)
         df1 = lambda m, n:-self.endhost_weight[m] / sum(z[m][j] for j in range(self.J)) + \
-                          self.q * sum(self.H[m][l][n] / self.c[l] * math.exp(u[l]) for l in range(self.L))
+                          self.q * sum(self.H[m][l][n] / self.capa[l] * math.exp(u[l]) for l in range(self.L))
         for i in range(self.I):
             for j in range(self.J):
                 Df[i][j] = df1(i, j)
@@ -82,10 +84,11 @@ class Netcal(object):
         GH = matrix(self.GH1)
         DI = -numpy.identity(self.IJ)
         G = matrix(numpy.vstack((GH, DI)))
-        h = matrix(numpy.vstack((self.c, self.rhs2st)))
+        h = matrix(numpy.vstack((self.capa, self.rhs2st)))
         sol = solvers.cp(self.F, G, h)
-        return sol['x'] # }}}
-logfile.close    
+        return sol['x'],sol['z'] # }}}
+logfile.close 
+   
     
             
     
