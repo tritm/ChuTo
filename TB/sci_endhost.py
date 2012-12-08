@@ -27,7 +27,7 @@ def packet_builder():
         p[i][IP].payload = str(vpayload)
     return p
 def connect_to_hm():       
-    MGR_IP_ADDRESS = '192.168.0.5'  # The remote host
+    MGR_IP_ADDRESS = '192.168.2.5'  # The remote host
     MGR_PORT = 1990                    # The same port as used by the server
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((MGR_IP_ADDRESS, MGR_PORT))
