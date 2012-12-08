@@ -26,24 +26,8 @@ def packet_builder():
         p[i][IP].proto = proto[i]
         p[i][IP].payload = str(vpayload)
     return p
-#def packet_builder():
-#    p = [0]*4
-#    logfile = open('endhost.log','w')
-#    vlan = [2,3,2,3]
-#    proto = [6,6,17,17]
-#    infile = open('payload','r')
-#    vpayload = infile.readlines()
-#    infile.close
-#    for i in range(4):
-#        p[i] = Ether()/Dot1Q()/IP()
-#        p[i].dst = "78:cd:8e:81:86:59"
-#        p[i].src = "78:cd:8e:81:1b:b7"
-#        p[i][Dot1Q].vlan = vlan[i]
-#        p[i][IP].proto = proto[i]
-#        p[i][IP].payload = str(vpayload)
-#    return p
 def connect_to_hm():       
-    MGR_IP_ADDRESS = '192.168.0.5'  # The remote host
+    MGR_IP_ADDRESS = '192.168.2.5'  # The remote host
     MGR_PORT = 1890                    # The same port as used by the server
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((MGR_IP_ADDRESS, MGR_PORT))
@@ -63,9 +47,6 @@ def send_max_rates():
     ta_eng_nperiod += 1
     print 'ta_eng_max_rate =' +ta_eng_max_rate
     s.send(ta_eng_max_rate)
-#    if ta_eng_nperiod % 100 == 0: # ta_eng_max_rate = str(randint(1,10)*10) 
-#        ta_eng_max_rate += 20;
-#    ta_eng_nperiod += 1
     ta_eng_max_rate = 30
     print 'ta_eng_max_rate =' +str(ta_eng_max_rate)
     s.send(str(ta_eng_max_rate))
