@@ -3,14 +3,11 @@ from server import *
 from cvxopt import matrix
 import numpy, time, os
 import data
-def initvar(): 
-    global eng_Q, sci_Q, nox_Q, eng_cv, sci_cv, nox_cv, L, eng_capa, sci_capa
-    global eng_capa_temp, sci_capa_temp, delta, conn
 import numpy, time
 from data import *
 def initvar(): 
-    global eng_Q, sci_Q, eng_cv, sci_cv, L, sub_capa, eng_capa, sci_capa
-    global eng_capa_temp, sci_capa_temp, delta
+    global eng_Q, sci_Q, nox_Q, eng_cv, sci_cv, nox_cv, L, eng_capa, sci_capa
+    global eng_capa_temp, sci_capa_temp, delta, conn
     eng_Q = []
     sci_Q = []
     nox_Q = []
@@ -62,11 +59,6 @@ nox = Nox(conn,nox_Q,nox_cv)
 nox.start()
 alpha = 5
 i = 1
-initvar() 
-eng = Vncal('eng', eng_Q, eng_cv, eng_capa,period)
-eng.start()
-sci = Vncal('sci', sci_Q, sci_cv, sci_capa,period)
-sci.start() 
 while True: 
     #------------------------------------------------------ get congestion price
     eng_cp_all = get_cp(eng_cv,eng_Q)
