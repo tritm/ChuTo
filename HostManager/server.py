@@ -6,7 +6,7 @@ import data
 class Vncal(Thread):
     def __init__(self,vid,Q,cv,capa,period,alpha=1): # {{{
         Thread.__init__(self)
-        self.MGR_IP_ADDRESS = '192.168.0.5'
+        self.MGR_IP_ADDRESS = '192.168.2.5'
         self.NUM_SOURCES = 2
         self.Q = Q
         self.cv = cv
@@ -53,9 +53,9 @@ class Vncal(Thread):
         return all_opt_rate,cp_all # }}}
     def end_opt_rate(self,host_id, max_rate,all_opt_rate): # {{{
         print 'Calculate optimal rate for EndHost %s of virtual network %s...' %(host_id, self.vid)  # {{{ # {{{
-        if host_id == '192.168.0.14': #TA
+        if host_id == '192.168.2.14': #TA
             optimal_rate = tuple(all_opt_rate[0:2])
-        elif host_id == '192.168.0.15': #TB
+        elif host_id == '192.168.2.15': #TB
             optimal_rate = tuple(all_opt_rate[2:4])
 
         print 'optimal_rate (100Kbps) for EndHost %s of virtual network %s = %s with alpha = (%s)' %(host_id,self.vid,str(optimal_rate),self.alpha)
