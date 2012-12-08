@@ -9,10 +9,6 @@ import timeit
 import os
 from data import *
 #p0 = (eng,vlan2), p1 = (eng,vlan3), p2 = (sci,vlan2), p3 = (sci,vlan3)
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 0218ac36aeeff6c9857cf218080c5f46cdafa5ba
 def packet_builder():
     p = [0]*4
     logfile = open('endhost.log','w')
@@ -29,9 +25,6 @@ def packet_builder():
         p[i][IP].proto = proto[i]
         p[i][IP].payload = str(vpayload)
     return p
-<<<<<<< HEAD
-=======
-=======
 #def packet_builder():
 #    p = [0]*4
 #    logfile = open('endhost.log','w')
@@ -48,8 +41,6 @@ def packet_builder():
 #        p[i][IP].proto = proto[i]
 #        p[i][IP].payload = str(vpayload)
 #    return p
->>>>>>> 5a6cc759a1faab2d6c4b93201a7508cba6a7bc47
->>>>>>> 0218ac36aeeff6c9857cf218080c5f46cdafa5ba
 def connect_to_hm():       
     MGR_IP_ADDRESS = '192.168.0.5'  # The remote host
     MGR_PORT = 1990                    # The same port as used by the server
@@ -57,15 +48,9 @@ def connect_to_hm():
     s.connect((MGR_IP_ADDRESS, MGR_PORT))
     return s
 def path_traffic_sending(vlan,npackets):
-<<<<<<< HEAD
         sendpfast(vlan=vlan,limit=npackets,iface="eth1")
-=======
-<<<<<<< HEAD
         sendpfast(vlan=vlan,limit=npackets,iface="eth1")
-=======
         sendpfast(vlan=vlan,slice="sci",limit=npackets,iface="eth1")
->>>>>>> 5a6cc759a1faab2d6c4b93201a7508cba6a7bc47
->>>>>>> 0218ac36aeeff6c9857cf218080c5f46cdafa5ba
 def wait_for_request_from_mgr():
     data =  s.recv(1024)
     print data
@@ -73,57 +58,35 @@ def wait_for_request_from_mgr():
         print >> logfile, 'data received is different from expected '
 def send_max_rates():
     global ta_sci_nperiod, ta_sci_max_rate
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 0218ac36aeeff6c9857cf218080c5f46cdafa5ba
     if ta_sci_nperiod % 10 == 0:  ta_sci_max_rate = str(randint(1,10)) 
     ta_sci_nperiod += 1
 
 #    max_rate = str(5)
     s.send(ta_sci_max_rate)
-<<<<<<< HEAD
-=======
-=======
 #    if ta_sci_nperiod % 100 == 0: # ta_sci_max_rate = str(randint(1,10)*10) 
 #        ta_sci_max_rate += 10
 #    ta_sci_nperiod += 1
     ta_sci_max_rate = 70
     print 'ta_sci_max_rate = ' +str(ta_sci_max_rate)
     s.send(str(ta_sci_max_rate))
->>>>>>> 5a6cc759a1faab2d6c4b93201a7508cba6a7bc47
->>>>>>> 0218ac36aeeff6c9857cf218080c5f46cdafa5ba
 def wait_for_optimal_rates():
     optimal_rates_string = s.recv(1024) 
     optimal_rates_tuple = tuple(float(s) for s in optimal_rates_string[1:-1].split(','))
     print 'optimal rate = ' + str(optimal_rates_tuple)
     return optimal_rates_tuple
-<<<<<<< HEAD
 p = packet_builder()
-=======
-<<<<<<< HEAD
 p = packet_builder()
-=======
 #p = packet_builder()
->>>>>>> 5a6cc759a1faab2d6c4b93201a7508cba6a7bc47
->>>>>>> 0218ac36aeeff6c9857cf218080c5f46cdafa5ba
 s = connect_to_hm()
 
 while True:
     wait_for_request_from_mgr()
     send_max_rates()
     optimal_rates_tuple = wait_for_optimal_rates()
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 0218ac36aeeff6c9857cf218080c5f46cdafa5ba
     vlan2_rate = optimal_rates_tuple[0]
     vlan2_npackets = int(vlan2_rate*period*1000000.0/12000.0)
     vlan3_rate = optimal_rates_tuple[1]
     vlan3_npackets = int(vlan3_rate*period*1000000.0/12000.0)
-<<<<<<< HEAD
-=======
-=======
 #    vlan2_rate = optimal_rates_tuple[0]    
 #    vlan2_npackets = int(vlan2_rate*period*1048576.0/608.0)
 #    vlan3_rate = optimal_rates_tuple[1]
@@ -133,8 +96,6 @@ while True:
     vlan2_npackets = int(vlan2_rate*period*102400.0/720.0)
     vlan3_rate = optimal_rates_tuple[1]
     vlan3_npackets = int(vlan3_rate*period*102400.0/720.0)
->>>>>>> 5a6cc759a1faab2d6c4b93201a7508cba6a7bc47
->>>>>>> 0218ac36aeeff6c9857cf218080c5f46cdafa5ba
     t2 = Thread(target=path_traffic_sending, args=(2,vlan2_npackets,))
     t2.start()
     t3 = Thread(target=path_traffic_sending, args=(3,vlan3_npackets,))
