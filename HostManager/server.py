@@ -18,7 +18,6 @@ class Vncal(Thread):
         self.period =period 
         self.vid = vid
         self.alpha= alpha
-        self.wait =wait 
         self.vid = vid
         if self.vid == 'eng':
             self.MGR_PORT = 1890
@@ -123,7 +122,6 @@ class Vncal(Thread):
             self.cv.notify()
             self.cv.release()
             time.sleep(self.period)
-            time.sleep(self.wait)
             # }}}
 class Nox(Thread):
     def __init__(self,conn,Q,cv):
