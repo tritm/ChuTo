@@ -67,7 +67,6 @@ eng = Vncal('eng', eng_Q, eng_cv, eng_capa,period)
 eng.start()
 sci = Vncal('sci', sci_Q, sci_cv, sci_capa,period)
 sci.start() 
->>>>>>> 0218ac36aeeff6c9857cf218080c5f46cdafa5ba
 while True: 
     #------------------------------------------------------ get congestion price
     eng_cp_all = get_cp(eng_cv,eng_Q)
