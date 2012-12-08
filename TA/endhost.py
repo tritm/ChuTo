@@ -18,20 +18,20 @@ def packet_builder():
     infile.close
     for i in range(4):
         p[i] = Ether()/Dot1Q()/IP()
-        p[i].dst = "08:00:27:c1:c5:8a"
-        p[i].src = "08:00:27:d8:ce:37"
+        p[i].dst = "78:cd:8e:81:86:59"
+        p[i].src = "78:cd:8e:81:1b:b7"
         p[i][Dot1Q].vlan = vlan[i]
         p[i][IP].proto = proto[i]
         p[i][IP].payload = str(vpayload)
     return p
 def connect_to_hm():       
-    MGR_IP_ADDRESS = '203.178.135.32'  # The remote host
+    MGR_IP_ADDRESS = '161.200.90.72'  # The remote host
     MGR_PORT = 1890                    # The same port as used by the server
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((MGR_IP_ADDRESS, MGR_PORT))
     return s
 def path_traffic_sending(vlan,pps):
-        sendpfast(p[vlan - 2],pps=pps,loop=pps*socket_wait_time,iface="eth0")
+        sendpfast(p[vlan - 2],pps=pps,loop=pps*socket_wait_time,iface="eth1")
 def wait_for_request_from_mgr():
     data =  s.recv(1024)
     print data
