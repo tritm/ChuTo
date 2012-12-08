@@ -47,7 +47,7 @@ def rate(tcp_vlan2,udp_vlan2,tcp_vlan3,udp_vlan3):
    os.system(cmd_u3)
    os.system(cmd_mon)
 initvar() 
-MGR_IP_ADDRESS = "192.168.0.5"
+MGR_IP_ADDRESS = "192.168.2.5"
 MGR_PORT = 2000
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind ((MGR_IP_ADDRESS, MGR_PORT))
