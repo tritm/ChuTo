@@ -94,8 +94,4 @@ while True:
     sci.update(sci_capa,alpha)   
 #    rate(eng_capa[0]*1e5,sci_capa[0]*1e5,eng_capa[1]*1e5,sci_capa[1]*1e5)
     i += 1
-    #if (i-1)%100 == 0:
-    #    alpha += 1
-    eng.update(eng_capa)
-    sci.update(sci_capa)
     #Use source price----------------------------------------time.sleep(wait) 
