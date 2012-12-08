@@ -25,15 +25,12 @@ class Netcal(object):
             if self.capa[l]==0: self.capa[l] = .1
         self.rhs2st = matrix(numpy.zeros(self.IJ))
         self.H = self.routing_matrix() # }}}
-<<<<<<< HEAD
 #        print 'TRI.grad: self.capa = ', self.capa, 
 #        print 'TRI.grad: self.rhs2st = ', self.rhs2st 
     def utilization(self,z): # {{{
-=======
         print 'TRI.grad: self.capa = ', self.capa, 
         print 'TRI.grad: self.rhs2st = ', self.rhs2st 
     def utility(self,z): # {{{
->>>>>>> 0218ac36aeeff6c9857cf218080c5f46cdafa5ba
         u = numpy.empty((self.L))
         u1 = lambda l: 1. / self.capa[l] * (sum(sum(self.H[i][l][j] * z[i][j] for j in range(self.J)) for i in range(self.I)))
         for l in range(self.L): u[l] = u1(l)
@@ -42,7 +39,6 @@ class Netcal(object):
 #remove the utilization part in objective function first
 #        u = self.utilization(z)
         if m == p and n == k: 
-<<<<<<< HEAD
             return self.endhost_weight[m] / sum(z[m][j] for j in range(self.J)) ** 2 #+ \
                    #self.q * sum(((self.H[m][l][n] / self.capa[l]) ** 2) * math.exp(u[l]) for l in range(self.L))
         elif m == p:
@@ -50,7 +46,6 @@ class Netcal(object):
                     #self.q * sum((self.H[m][l][n] * self.H[p][l][k] / self.capa[l] ** 2) * math.exp(u[l]) for l in range(self.L))
         else:
             return 0 #self.q * sum(self.H[m][l][n] * self.H[p][l][k] / (self.capa[l] ** 2) * math.exp(u[l]) for l in range(self.L)) # }}}
-=======
             return self.endhost_weight[m] / sum(z[m][j] for j in range(self.J)) ** 2 + \
                    self.q * sum(((self.H[m][l][n] / self.capa[l]) ** 2) * math.exp(u[l]) for l in range(self.L))
         elif m == p:
@@ -58,7 +53,6 @@ class Netcal(object):
                     self.q * sum((self.H[m][l][n] * self.H[p][l][k] / self.capa[l] ** 2) * math.exp(u[l]) for l in range(self.L))
         else:
             return self.q * sum(self.H[m][l][n] * self.H[p][l][k] / (self.capa[l] ** 2) * math.exp(u[l]) for l in range(self.L)) # }}}
->>>>>>> 0218ac36aeeff6c9857cf218080c5f46cdafa5ba
     def func(self,x): # {{{
         z = numpy.reshape(x, (self.I, self.J))
         u = self.utilization(z)
@@ -67,15 +61,12 @@ class Netcal(object):
     def gradFunc(self,x): # {{{
         z = numpy.reshape(x, (self.I, self.J))
         Df = numpy.empty((self.I, self.J))
-<<<<<<< HEAD
         #u = self.utilization(z)
         df1 = lambda m, n:-self.endhost_weight[m] / sum(z[m][j] for j in range(self.J)) #+ \
                           #self.q * sum(self.H[m][l][n] / self.capa[l] * math.exp(u[l]) for l in range(self.L))
-=======
         u = self.utility(z)
         df1 = lambda m, n:-self.endhost_weight[m] / sum(z[m][j] for j in range(self.J)) + \
                           self.q * sum(self.H[m][l][n] / self.capa[l] * math.exp(u[l]) for l in range(self.L))
->>>>>>> 0218ac36aeeff6c9857cf218080c5f46cdafa5ba
         for i in range(self.I):
             for j in range(self.J):
                 Df[i][j] = df1(i, j)
