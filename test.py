@@ -1,1 +1,3 @@
-print 'cai nay chay co ve rat nhanh'
+from grad import *
+t = Netcal()
+print c.H
