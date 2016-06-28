@@ -5,7 +5,7 @@ from threading import Thread, Condition
 class Vncal(Thread):
     def __init__(self,vid,Q,cv,capa,wait): # {{{
         Thread.__init__(self)
-        self.MGR_IP_ADDRESS = '203.178.135.32'
+        self.MGR_IP_ADDRESS = '127.0.0.1'
         self.NUM_SOURCES = 2
         self.Q = Q
         self.cv = cv

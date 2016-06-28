@@ -76,7 +76,7 @@ while True:
     #-------------- re-normalize to make eng_capa[l] + sci_capa[l] = sub_capa[l]
 #    print "TRI.hm: eng_capa_temp = \n", eng_capa_temp
 #    print "TRI.hm: sci_capa_temp = \n", sci_capa_temp
-    print 'TRI.hm: data.sub_capa[1] = %d'%data.sub_capa[1]
+        print 'TRI.hm: data.sub_capa[1] = %d'%data.sub_capa[1]
         eng_capa_temp[l] = eng_capa[l] + sci_capa[l]*(eng_cp[l] - sci_cp[l])/(eng_capa[l] + sci_capa[l])
         sci_capa_temp[l] = sci_capa[l] + eng_capa[l]*(sci_cp[l] - eng_cp[l])/(eng_capa[l] + sci_capa[l])
         if eng_capa_temp[l] < 0: eng_capa_temp[l] = 0
