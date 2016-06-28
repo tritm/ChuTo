@@ -51,4 +51,6 @@ while True: # {{{
     print "TRI.hm: sci_capa = \n", sci_capa
     eng.update(eng_capa)
     sci.update(sci_capa)
+    
     #----------------------------------------time.sleep(wait) # }}}
+    
